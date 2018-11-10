@@ -10,7 +10,7 @@ function load() {
 }
 function save(homeinfo) {
   const homefile = join(process.env.HOME, "/.rninfo");
-  fs.writeFileSync(homefile, JSON.stringify(homeinfo));
+  return fs.writeFileSync(homefile, JSON.stringify(homeinfo));
 }
 
 async function get(key, question, validator = Boolean) {
@@ -35,8 +35,15 @@ async function get(key, question, validator = Boolean) {
     } else return false;
   } else return value;
 }
+
+function set(key, value) {
+  let o = load();
+  o[key] = value;
+  return save(o);
+}
 module.exports = {
   load,
   save,
-  get
+  get,
+  set
 };

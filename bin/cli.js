@@ -23,11 +23,9 @@ commander
   .description("Set primitive value by key in rninfo")
   .option("-j --json", "Treat value as JSON-encoded")
   .action((key, value, cmd) => {
-    let o = load();
     try {
       let v = cmd.json ? JSON.parse(value) : value;
-      o[key] = v;
-      save(o);
+      set(v);
     } catch (e) {
       console.error("Error setting value - possible JSON parsing error");
       process.exit(1);
