@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const commander = require("commander");
-const { load, get, save } = require("../");
+const { load, get, save, set } = require("../");
 commander
   .command("list")
   .description("List values in rninfo")
@@ -25,7 +25,7 @@ commander
   .action((key, value, cmd) => {
     try {
       let v = cmd.json ? JSON.parse(value) : value;
-      set(v);
+      set(key, v);
     } catch (e) {
       console.error("Error setting value - possible JSON parsing error");
       process.exit(1);
