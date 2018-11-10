@@ -24,7 +24,12 @@ commander
   .option("-j --json", "Treat value as JSON-encoded")
   .action((key, value, cmd) => {
     let o = load();
-    let v = cmd.json ? JSON.parse(value) : value;
+    try {
+      let v = cmd.json ? JSON.parse(value) : value;
+    } catch (e) {
+      console.error("Error setting this value", e);
+      process.exit(1);
+    }
     o[key] = v;
     save(o);
   });
