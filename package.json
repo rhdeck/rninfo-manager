@@ -14,5 +14,9 @@
     "react-native"
   ],
   "author": "Ray Deck",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.19.0"
+  },
+  "bin": "bin/cli.js"
 }

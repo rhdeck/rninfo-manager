@@ -6,12 +6,7 @@ const inquirer = require("inquirer");
 
 function load() {
   const homefile = join(process.env.HOME, "/.rninfo");
-  var homeinfo;
-  if (fs.existsSync(homefile)) {
-    homeinfo = JSON.parse(fs.readFileSync(homefile));
-  } else {
-    homeinfo = {};
-  }
+  return fs.existsSync(homefile) ? JSON.parse(fs.readFileSync(homefile)) : {};
 }
 function save(homeinfo) {
   const homefile = join(process.env.HOME, "/.rninfo");
@@ -20,7 +15,8 @@ function save(homeinfo) {
 
 async function get(key, question, validator = Boolean) {
   const o = load();
-  if (validator[key] !== true) {
+  const { [key]: value } = o;
+  if (validator(value) !== true) {
     if (question) {
       try {
         const { key: value } = await inquirer.prompt([
@@ -37,7 +33,7 @@ async function get(key, question, validator = Boolean) {
         return false;
       }
     } else return false;
-  }
+  } else return value;
 }
 module.exports = {
   load,
