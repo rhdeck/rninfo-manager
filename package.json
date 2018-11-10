@@ -18,5 +18,8 @@
   "dependencies": {
     "commander": "^2.19.0"
   },
-  "bin": "bin/cli.js"
+  "bin": {
+    "rninfo-manager": "bin/cli.js",
+    "rni": "bin/cli.js"
+  }
 }
