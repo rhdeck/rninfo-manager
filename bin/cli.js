@@ -26,12 +26,12 @@ commander
     let o = load();
     try {
       let v = cmd.json ? JSON.parse(value) : value;
+      o[key] = v;
+      save(o);
     } catch (e) {
-      console.error("Error setting this value", e);
+      console.error("Error setting value - possible JSON parsing error");
       process.exit(1);
     }
-    o[key] = v;
-    save(o);
   });
 commander
   .command("clear")
