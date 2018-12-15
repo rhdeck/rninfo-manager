@@ -19,7 +19,7 @@ async function get(key, question, validator = Boolean) {
   if (validator(value) !== true) {
     if (question) {
       try {
-        const { key: value } = await inquirer.prompt([
+        const { [key]: value } = await inquirer.prompt([
           {
             message: question,
             name: key,
